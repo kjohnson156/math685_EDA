@@ -1,0 +1,22 @@
+---
+title: "Data management"
+author: "Math 685 students"
+date: "9/20/2019"
+output: html_document
+---
+
+# Read in data
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+ames <- read.csv("https://norcalbiostat.netlify.com/data/ames.csv", header=TRUE)
+```
+
+# Do data management 
+
+
+
+# Save clean data
+```{r}
+#save(clean, "ames_clean.Rdata")
+```
+
