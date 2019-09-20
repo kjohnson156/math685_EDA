@@ -2,8 +2,9 @@
 EDA Project for Math 685
 
 # Authors
-Kathleen
 
-
-Robin Donatello
+* Kathleen
+* Irfan Ainuddin
+* Megan Luke
+* Robin Donatello
 
