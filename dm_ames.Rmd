@@ -11,7 +11,71 @@ knitr::opts_chunk$set(echo = TRUE)
 ames <- read.csv("https://norcalbiostat.netlify.com/data/ames.csv", header=TRUE)
 ```
 
+
 # Do data management 
+```{r}
+library(tidyverse)
+```
+
+```{r}
+str(ames)
+```
+```{r}
+summary(ames$House.Style)
+str(ames$House.Style)
+```
+```{r}
+summary(ames$Yr.Sold)
+```
+```{r}
+ggplot(data = ames, mapping = aes(x = Yr.Sold)) +
+  geom_histogram(binwidth = 0.1)
+```
+
+I am interested in looking at the trends of the year the house was sold and the sale price. By doing a str on the data set, those two variables are integers. 
+
+```{r}
+ggplot(data = ames, mapping = aes(x = SalePrice)) +
+  geom_histogram(binwidth = 100000)
+```
+Checking if there are unusual values
+
+```{r}
+ggplot(ames) + 
+  geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
+  coord_cartesian(ylim = c(0, 800))
+```
+```{r}
+ggplot(ames) + 
+  geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
+  coord_cartesian(ylim = c(0, 1000))
+```
+
+```{r}
+ggplot(ames) + 
+  geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
+  coord_cartesian(xlim = c(800000, 500000))
+```
+
+I don't think there are any unusual values that need to be removed or coded as missing, but if someone wanted to double check that would be great. 
+
+
+```{r}
+summary(ames$Yr.Sold)
+```
+
+
+```{r}
+str(ames)
+```
+```{r}
+ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
+  geom_freqpoly(binwidth = 100000)
+```
+```{r}
+ggplot(data = ames, mapping = aes(x = Yr.Sold, colour = SalePrice)) +
+  geom_freqpoly(binwidth = 0.1)
+```
 
 
 
@@ -19,4 +83,6 @@ ames <- read.csv("https://norcalbiostat.netlify.com/data/ames.csv", header=TRUE)
 ```{r}
 #save(clean, "ames_clean.Rdata")
 ```
+
+
 
