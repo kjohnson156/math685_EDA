@@ -1,5 +1,10 @@
 # math685_EDA
 EDA Project for Math 685
 
+# Authors
 
-Megan Luke
+* Kathleen
+* Irfan Ainuddin
+* Megan Luke
+* Robin Donatello
+
