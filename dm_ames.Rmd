@@ -20,13 +20,19 @@ library(tidyverse)
 ```{r}
 str(ames)
 ```
+
+
 ```{r}
 summary(ames$House.Style)
 str(ames$House.Style)
 ```
+
+
 ```{r}
 summary(ames$Yr.Sold)
 ```
+
+
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold)) +
   geom_histogram(binwidth = 0.1)
@@ -45,6 +51,8 @@ ggplot(ames) +
   geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
   coord_cartesian(ylim = c(0, 800))
 ```
+
+
 ```{r}
 ggplot(ames) + 
   geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
@@ -59,7 +67,6 @@ ggplot(ames) +
 
 I don't think there are any unusual values that need to be removed or coded as missing, but if someone wanted to double check that would be great. 
 
-
 ```{r}
 summary(ames$Yr.Sold)
 ```
@@ -68,10 +75,14 @@ summary(ames$Yr.Sold)
 ```{r}
 str(ames)
 ```
+
+
 ```{r}
 ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
   geom_freqpoly(binwidth = 100000)
 ```
+
+
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold, colour = SalePrice)) +
   geom_freqpoly(binwidth = 0.1)
