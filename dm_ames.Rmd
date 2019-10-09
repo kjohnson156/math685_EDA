@@ -34,6 +34,17 @@ str(ames$House.Style)
 summary(ames$Yr.Sold)
 ```
 
+```{r}
+str(ames$Yr.Sold)
+```
+
+
+```{r}
+ames %>% 
+  count(Yr.Sold)
+```
+
+
 
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold)) +
@@ -52,6 +63,16 @@ Checking if there are unusual values
 ggplot(ames) + 
   geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
   coord_cartesian(ylim = c(0, 800))
+```
+
+
+```{r}
+ames %>% 
+  count(SalePrice)
+```
+
+```{r}
+summary(ames$SalePrice)
 ```
 
 
@@ -125,10 +146,21 @@ ggplot(ames, aes(x=SalePrice, col=Yr.Sold)) + geom_density()
 ```
 I don't think this one makes any sense.
 
+```{r}
+ggplot(data = ames, mapping = aes(x = Yr.Sold, y = SalePrice)) +
+  geom_boxplot()
+```
+
+
+
+```{r}
+ames_clean <- ames
+```
+
 
 # Save clean data
 ```{r}
-#save(clean, "ames_clean.Rdata")
+save(ames_clean, file = "ames_clean.Rdata")
 ```
 
 
