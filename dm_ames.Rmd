@@ -2,7 +2,9 @@
 title: "Data management"
 author: "Math 685 students"
 date: "9/20/2019"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 # Read in data
@@ -20,13 +22,26 @@ library(tidyverse)
 ```{r}
 str(ames)
 ```
+
 ```{r}
 summary(ames$House.Style)
 str(ames$House.Style)
 ```
+
 ```{r}
 summary(ames$Yr.Sold)
 ```
+
+```{r}
+str(ames$Yr.Sold)
+```
+
+
+```{r}
+ames %>% 
+  count(Yr.Sold)
+```
+
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold)) +
   geom_histogram(binwidth = 0.1)
@@ -45,6 +60,16 @@ ggplot(ames) +
   geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
   coord_cartesian(ylim = c(0, 800))
 ```
+
+```{r}
+ames %>% 
+  count(SalePrice)
+```
+
+```{r}
+summary(ames$SalePrice)
+```
+
 ```{r}
 ggplot(ames) + 
   geom_histogram(mapping = aes(x = SalePrice), binwidth = 100000) +
@@ -59,19 +84,11 @@ ggplot(ames) +
 
 I don't think there are any unusual values that need to be removed or coded as missing, but if someone wanted to double check that would be great. 
 
-
-```{r}
-summary(ames$Yr.Sold)
-```
-
-
-```{r}
-str(ames)
-```
 ```{r}
 ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
   geom_freqpoly(binwidth = 100000)
 ```
+
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold, colour = SalePrice)) +
   geom_freqpoly(binwidth = 0.1)
@@ -118,6 +135,57 @@ conditionplot
 # Save clean data
 ```{r}
 #save(clean, "ames_clean.Rdata")
+=======
+```{r}
+ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
+  geom_freqpoly(binwidth = 100000)
+```
+
+
+```{r}
+ames %>% group_by(Yr.Sold) %>% 
+         summarise(mean=mean(SalePrice), 
+                   sd = sd(SalePrice))
+```
+
+
+Let's see if there is a trend in the year the houses were sold and the sale price. 
+```{r}
+ggplot(ames, aes(x=SalePrice, fill=Yr.Sold)) + 
+    geom_histogram() + 
+    facet_wrap(~Yr.Sold)
+```
+I like this set of graphics best so far, but I am still not sure if this is clear on what I am looking at. 
+
+```{r}
+ggplot(ames, aes(x=SalePrice, fill=Yr.Sold)) + 
+    geom_histogram() + 
+    facet_wrap(~Yr.Sold)+
+  geom_freqpoly(binwidth = 10000)+
+  coord_cartesian(xlim = c(0, 550000))
+```
+I think setting a binwidth is what I want to do to make it more clear, but I am not sure what to set it at. I have played around with different numbers and so far 10,000 looks the best. Any suggestions here?
+ 
+```{r}
+ggplot(ames, aes(x=SalePrice, col=Yr.Sold)) + geom_density()
+```
+I don't think this one makes any sense.
+
+```{r}
+ggplot(data = ames, mapping = aes(x = Yr.Sold, y = SalePrice)) +
+  geom_boxplot()
+```
+
+
+
+```{r}
+ames_clean <- ames
+```
+
+
+# Save clean data
+```{r}
+save(ames_clean, file = "ames_clean.Rdata")
 ```
 
 
