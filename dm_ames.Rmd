@@ -23,12 +23,10 @@ library(tidyverse)
 str(ames)
 ```
 
-
 ```{r}
 summary(ames$House.Style)
 str(ames$House.Style)
 ```
-
 
 ```{r}
 summary(ames$Yr.Sold)
@@ -43,8 +41,6 @@ str(ames$Yr.Sold)
 ames %>% 
   count(Yr.Sold)
 ```
-
-
 
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold)) +
@@ -65,7 +61,6 @@ ggplot(ames) +
   coord_cartesian(ylim = c(0, 800))
 ```
 
-
 ```{r}
 ames %>% 
   count(SalePrice)
@@ -74,7 +69,6 @@ ames %>%
 ```{r}
 summary(ames$SalePrice)
 ```
-
 
 ```{r}
 ggplot(ames) + 
@@ -91,26 +85,57 @@ ggplot(ames) +
 I don't think there are any unusual values that need to be removed or coded as missing, but if someone wanted to double check that would be great. 
 
 ```{r}
-summary(ames$Yr.Sold)
-```
-
-
-```{r}
-str(ames)
-```
-
-
-```{r}
 ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
   geom_freqpoly(binwidth = 100000)
 ```
-
 
 ```{r}
 ggplot(data = ames, mapping = aes(x = Yr.Sold, colour = SalePrice)) +
   geom_freqpoly(binwidth = 0.1)
 ```
 
+## Ideas for comparison (Megan)
+
+How do physical factors of home location and basic amenities affect price?
+
+Utilities, Neighborhood, Lot Configuration, Sale Condition
+
+# Utility Type
+
+Utility type could play a role in purchase price and desireability due to the impact on price of upkeep of the property
+
+```{r}
+utilityplot <- ggplot(data = ames, aes(x = Utilities, y = SalePrice))+ geom_boxplot()
+utilityplot
+```
+
+# Neighborhood
+
+Neighborhood could influence sale price
+
+```{r}
+neighborplot <- ggplot(data = ames, aes(x = Neighborhood, y = SalePrice))+ geom_boxplot()+ coord_flip()
+neighborplot
+```
+
+# Lot Configuration
+
+```{r}
+lotplot <- ggplot(data = ames, aes(x = Lot.Config, y = SalePrice))+ geom_boxplot()
+lotplot
+```
+
+# Sale Condition
+
+```{r}
+conditionplot <- ggplot(data = ames, aes(x = Sale.Condition, y = SalePrice))+ geom_boxplot()
+conditionplot
+```
+
+# Save clean data
+```{r}
+#save(clean, "ames_clean.Rdata")
+=======
 ```{r}
 ggplot(data = ames, mapping = aes(x = SalePrice, colour = Yr.Sold)) +
   geom_freqpoly(binwidth = 100000)
